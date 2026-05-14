@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moda Vers&aacute;til | Feminino Essencial</title>
+  <style>
+    :root {
+      --ink: #191714;
+      --muted: #68615a;
+      --paper: #fbfaf7;
+      --surface: #ffffff;
+      --line: #dfd8cf;
+      --sage: #8d9b8f;
+      --clay: #a86f58;
+      --rose: #d8a7a2;
+      --charcoal: #34302d;
+      --shadow: 0 18px 45px rgba(39, 31, 24, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 72px;
+      padding: 0 5vw;
+      background: rgba(251, 250, 247, 0.88);
+      border-bottom: 1px solid rgba(223, 216, 207, 0.7);
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.35rem, 2.6vw, 2rem);
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav a {
+      padding: 8px 0;
+      border-bottom: 1px solid transparent;
+      transition: color 180ms ease, border-color 180ms ease;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--ink);
+      border-color: var(--clay);
+      outline: 0;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-button,
+    .menu-toggle {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .icon-button:hover,
+    .menu-toggle:hover {
+      transform: translateY(-1px);
+      border-color: var(--clay);
+    }
+
+    .saved-count {
+      display: inline-grid;
+      place-items: center;
+      min-width: 18px;
+      height: 18px;
+      margin-left: -12px;
+      align-self: flex-start;
+      border-radius: 999px;
+      background: var(--clay);
+      color: #fff;
+      font-size: 0.72rem;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 72px);
+      display: grid;
+      align-items: end;
+      padding: 8vh 5vw 10vh;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(20, 18, 16, 0.70), rgba(20, 18, 16, 0.28) 45%, rgba(20, 18, 16, 0.05)),
+        url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1800&q=82") center / cover;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 140px;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(251, 250, 247, 0), var(--paper));
+    }
+
+    .hero-content {
+      max-width: 710px;
+      color: #fff;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      font-size: clamp(3rem, 9vw, 7.5rem);
+      line-height: 0.93;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 540px;
+      margin-bottom: 30px;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button.primary {
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .button.secondary {
+      border-color: rgba(255, 255, 255, 0.42);
+      color: #fff;
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    section {
+      padding: 82px 5vw;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      max-width: 1180px;
+      margin: 0 auto 28px;
+    }
+
+    .section-head h2 {
+      margin-bottom: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1;
+    }
+
+    .section-head p {
+      max-width: 360px;
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      max-width: 1180px;
+      margin: 0 auto 28px;
+    }
+
+    .filter {
+      min-height: 40px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+    }
+
+    .filter.active,
+    .filter:hover {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .product {
+      background: var(--surface);
+      border: 1px solid rgba(223, 216, 207, 0.72);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 0 rgba(39, 31, 24, 0.03);
+    }
+
+    .product-media {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: #eee8df;
+    }
+
+    .product-media img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 260ms ease;
+    }
+
+    .product:hover .product-media img {
+      transform: scale(1.035);
+    }
+
+    .product-info {
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+    }
+
+    .product-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .product h3 {
+      margin-bottom: 0;
+      font-size: 1rem;
+      font-weight: 520;
+    }
+
+    .product small {
+      color: var(--muted);
+    }
+
+    .save {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .save.active {
+      background: var(--charcoal);
+      border-color: var(--charcoal);
+      color: #fff;
+    }
+
+    .price {
+      color: var(--clay);
+      font-weight: 620;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.9fr) minmax(280px, 1.1fr);
+      gap: 52px;
+      align-items: center;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding-top: 34px;
+    }
+
+    .story-media {
+      aspect-ratio: 1 / 1.18;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .story-media img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .story-copy h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      font-size: clamp(2.1rem, 5vw, 4.6rem);
+      line-height: 0.98;
+      margin-bottom: 22px;
+    }
+
+    .story-copy p {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      max-width: 1180px;
+      margin: 42px auto 0;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .value {
+      min-height: 168px;
+      padding: 24px;
+      background: var(--paper);
+    }
+
+    .value h3 {
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .value p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .newsletter {
+      background: var(--charcoal);
+      color: #fff;
+    }
+
+    .newsletter-inner {
+      display: grid;
+      grid-template-columns: 1fr minmax(280px, 460px);
+      gap: 40px;
+      align-items: center;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .newsletter h2 {
+      margin-bottom: 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1;
+    }
+
+    .newsletter p {
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .signup {
+      display: flex;
+      gap: 10px;
+      padding: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .signup input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      padding: 0 14px;
+      background: transparent;
+      color: #fff;
+    }
+
+    .signup input::placeholder {
+      color: rgba(255, 255, 255, 0.54);
+    }
+
+    .signup button {
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .message {
+      grid-column: 2;
+      min-height: 24px;
+      margin: -22px 0 0;
+      color: #f5d7cf;
+      font-size: 0.92rem;
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px 5vw;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: inline-grid;
+      }
+
+      .nav {
+        position: fixed;
+        inset: 72px 0 auto;
+        display: none;
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 16px 5vw 24px;
+        background: var(--paper);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav.open {
+        display: grid;
+      }
+
+      .nav a {
+        padding: 14px 0;
+      }
+
+      .hero {
+        min-height: 78vh;
+      }
+
+      .collection-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .story,
+      .newsletter-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .message {
+        grid-column: auto;
+        margin-top: -18px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .topbar {
+        min-height: 64px;
+      }
+
+      .brand {
+        font-size: 1.26rem;
+      }
+
+      .hero {
+        min-height: 82vh;
+        padding-top: 7vh;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(180deg, rgba(20, 18, 16, 0.2), rgba(20, 18, 16, 0.78)),
+          url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1100&q=82") center / cover;
+      }
+
+      h1 {
+        font-size: clamp(2.7rem, 18vw, 4.8rem);
+      }
+
+      section {
+        padding: 58px 5vw;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 12px;
+      }
+
+      .collection-grid,
+      .values {
+        grid-template-columns: 1fr;
+      }
+
+      .signup {
+        border-radius: 24px;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+      }
+
+      .signup input {
+        min-height: 44px;
+      }
+
+      footer {
+        display: grid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Moda Vers&aacute;til">Moda Vers&aacute;til</a>
+    <nav class="nav" id="siteNav" aria-label="Navega&ccedil;&atilde;o principal">
+      <a href="#colecao">Cole&ccedil;&atilde;o</a>
+      <a href="#essencia">Ess&ecirc;ncia</a>
+      <a href="#newsletter">Novidades</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-button" type="button" aria-label="Looks salvos">
+        <span aria-hidden="true">&#9825;</span>
+      </button>
+      <span class="saved-count" id="savedCount">0</span>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="siteNav">
+        <span aria-hidden="true">&#9776;</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Moda Vers&aacute;til">
+      <div class="hero-content">
+        <p class="eyebrow">Feminino essencial</p>
+        <h1>Moda Vers&aacute;til</h1>
+        <p class="hero-copy">Pe&ccedil;as limpas, elegantes e f&aacute;ceis de combinar para acompanhar manh&atilde;s de trabalho, tardes leves e noites especiais.</p>
+        <div class="button-row">
+          <a class="button primary" href="#colecao">Ver cole&ccedil;&atilde;o</a>
+          <a class="button secondary" href="#essencia">Conhecer a marca</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="colecao" aria-labelledby="collectionTitle">
+      <div class="section-head">
+        <h2 id="collectionTitle">Nova cole&ccedil;&atilde;o</h2>
+        <p>Uma sele&ccedil;&atilde;o c&aacute;psula com tecidos fluidos, cortes precisos e tons que conversam entre si.</p>
+      </div>
+
+      <div class="filters" role="list" aria-label="Filtrar produtos">
+        <button class="filter active" type="button" data-filter="all">Tudo</button>
+        <button class="filter" type="button" data-filter="work">Trabalho</button>
+        <button class="filter" type="button" data-filter="casual">Casual</button>
+        <button class="filter" type="button" data-filter="night">Noite</button>
+      </div>
+
+      <div class="collection-grid">
+        <article class="product" data-category="work">
+          <div class="product-media">
+            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&amp;fit=crop&amp;w=760&amp;q=80" alt="Vestido midi em tom claro">
+          </div>
+          <div class="product-info">
+            <div class="product-top">
+              <div>
+                <h3>Vestido Midi Clara</h3>
+                <small>Alfaiataria leve</small>
+              </div>
+              <button class="save" type="button" aria-label="Salvar Vestido Midi Clara">&#9825;</button>
+            </div>
+            <span class="price">R$ 289</span>
+          </div>
+        </article>
+
+        <article class="product" data-category="casual">
+          <div class="product-media">
+            <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&amp;fit=crop&amp;w=760&amp;q=80" alt="Blusa branca minimalista">
+          </div>
+          <div class="product-info">
+            <div class="product-top">
+              <div>
+                <h3>Blusa Linho Aura</h3>
+                <small>Respir&aacute;vel e macia</small>
+              </div>
+              <button class="save" type="button" aria-label="Salvar Blusa Linho Aura">&#9825;</button>
+            </div>
+            <span class="price">R$ 159</span>
+          </div>
+        </article>
+
+        <article class="product" data-category="work">
+          <div class="product-media">
+            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&amp;fit=crop&amp;w=760&amp;q=80" alt="Conjunto feminino de blazer e cal&ccedil;a">
+          </div>
+          <div class="product-info">
+            <div class="product-top">
+              <div>
+                <h3>Conjunto Lisboa</h3>
+                <small>Blazer e pantalona</small>
+              </div>
+              <button class="save" type="button" aria-label="Salvar Conjunto Lisboa">&#9825;</button>
+            </div>
+            <span class="price">R$ 429</span>
+          </div>
+        </article>
+
+        <article class="product" data-category="night">
+          <div class="product-media">
+            <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&amp;fit=crop&amp;w=760&amp;q=80" alt="Vestido preto elegante">
+          </div>
+          <div class="product-info">
+            <div class="product-top">
+              <div>
+                <h3>Slip Dress Noemi</h3>
+                <small>Cetim acetinado</small>
+              </div>
+              <button class="save" type="button" aria-label="Salvar Slip Dress Noemi">&#9825;</button>
+            </div>
+            <span class="price">R$ 349</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="essencia" aria-labelledby="storyTitle">
+      <div class="story">
+        <div class="story-media">
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&amp;fit=crop&amp;w=1000&amp;q=82" alt="Editorial de moda feminina minimalista">
+        </div>
+        <div class="story-copy">
+          <h2 id="storyTitle">Guarda-roupa simples, presen&ccedil;a marcante.</h2>
+          <p>A Moda Vers&aacute;til nasce para mulheres que querem se vestir com inten&ccedil;&atilde;o, sem excesso. Cada pe&ccedil;a &eacute; pensada para multiplicar combina&ccedil;&otilde;es e atravessar ocasi&otilde;es com naturalidade.</p>
+          <div class="values">
+            <div class="value">
+              <h3>Modelagem &uacute;til</h3>
+              <p>Cortes que funcionam em movimento, no dia inteiro.</p>
+            </div>
+            <div class="value">
+              <h3>Paleta conectada</h3>
+              <p>Tons neutros, verdes suaves e toques terrosos.</p>
+            </div>
+            <div class="value">
+              <h3>Compra consciente</h3>
+              <p>Pe&ccedil;as dur&aacute;veis para repetir sem parecer igual.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter" id="newsletter" aria-labelledby="newsletterTitle">
+      <div class="newsletter-inner">
+        <div>
+          <h2 id="newsletterTitle">Receba lan&ccedil;amentos primeiro.</h2>
+          <p>Novidades discretas, curadoria objetiva e acesso antecipado &agrave;s cole&ccedil;&otilde;es c&aacute;psula.</p>
+        </div>
+        <form class="signup" id="signupForm">
+          <input type="email" id="email" name="email" placeholder="seu@email.com" aria-label="E-mail" required>
+          <button type="submit">Entrar</button>
+        </form>
+        <p class="message" id="formMessage" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 Moda Vers&aacute;til</span>
+    <span>Atendimento online &bull; Segunda a sexta &bull; 9h &agrave;s 18h</span>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const nav = document.querySelector("#siteNav");
+    const filters = document.querySelectorAll(".filter");
+    const products = document.querySelectorAll(".product");
+    const saveButtons = document.querySelectorAll(".save");
+    const savedCount = document.querySelector("#savedCount");
+    const signupForm = document.querySelector("#signupForm");
+    const formMessage = document.querySelector("#formMessage");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+    });
+
+    nav.addEventListener("click", (event) => {
+      if (event.target.matches("a")) {
+        nav.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "Abrir menu");
+      }
+    });
+
+    filters.forEach((button) => {
+      button.addEventListener("click", () => {
+        const category = button.dataset.filter;
+
+        filters.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+
+        products.forEach((product) => {
+          const shouldShow = category === "all" || product.dataset.category === category;
+          product.hidden = !shouldShow;
+        });
+      });
+    });
+
+    saveButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        button.classList.toggle("active");
+        button.textContent = button.classList.contains("active") ? "\u2665" : "\u2661";
+        savedCount.textContent = document.querySelectorAll(".save.active").length;
+      });
+    });
+
+    signupForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const email = new FormData(signupForm).get("email");
+      formMessage.textContent = `${email} entrou na lista de novidades.`;
+      signupForm.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-noir: #0d0d0d;
+  --color-chalk: #fafaf7;
+  --color-sand: #c8b99a;
+  --color-camel: #8c6f4e;
+  --color-graphite: #3c3c3c;
+  --color-linen: #e8ddd0;
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  --font-sans: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-chalk);
+  color: var(--color-noir);
+  font-family: var(--font-sans), Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: var(--color-noir);
+  color: var(--color-chalk);
+}
+
+@layer components {
+  .editorial-kicker {
+    @apply text-[0.68rem] font-medium uppercase tracking-editorial text-graphite;
+  }
+
+  .container-luxury {
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12;
+  }
+
+  .focus-luxury {
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-camel;
+  }
+}
