@@ -65,10 +65,21 @@
     }
 
     .brand {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.35rem, 2.6vw, 2rem);
-      letter-spacing: 0;
-      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+    }
+
+    .brand img {
+      display: block;
+      max-height: 40px;
+      width: auto;
+    }
+
+    .hero-title img {
+      width: min(100%, 620px);
+      height: auto;
+      display: block;
     }
 
     .nav {
@@ -612,10 +623,12 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#top" aria-label="Moda Vers&aacute;til">Moda Vers&aacute;til</a>
-    <nav class="nav" id="siteNav" aria-label="Navega&ccedil;&atilde;o principal">
-      <a href="#colecao">Cole&ccedil;&atilde;o</a>
-      <a href="#essencia">Ess&ecirc;ncia</a>
+    <a class="brand" href="#top" aria-label="Moda Versátil">
+      <img src="logo.svg" alt="Moda Versátil logo">
+    </a>
+    <nav class="nav" id="siteNav" aria-label="Navegação principal">
+      <a href="#colecao">Coleção</a>
+      <a href="#essencia">Essência</a>
       <a href="#newsletter">Novidades</a>
     </nav>
     <div class="nav-actions">

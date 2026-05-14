@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" role="img" aria-labelledby="titleDesc">
+  <title id="titleDesc">Logo Moda Versátil</title>
+  <style>
+    .mark { font-family: Georgia, serif; font-weight: 700; fill: #2e2d2a; }
+    .label { font-family: Georgia, serif; font-size: 48px; letter-spacing: 8px; fill: #2e2d2a; }
+  </style>
+  <text x="50%" y="120" class="mark" font-size="160" text-anchor="middle">MV</text>
+  <text x="50%" y="216" class="label" text-anchor="middle">MODA VERSÁTIL</text>
+</svg>
