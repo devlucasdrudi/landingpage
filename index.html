@@ -1,838 +1,898 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moda Vers&aacute;til | Feminino Essencial</title>
-  <style>
-    :root {
-      --ink: #191714;
-      --muted: #68615a;
-      --paper: #fbfaf7;
-      --surface: #ffffff;
-      --line: #dfd8cf;
-      --sage: #8d9b8f;
-      --clay: #a86f58;
-      --rose: #d8a7a2;
-      --charcoal: #34302d;
-      --shadow: 0 18px 45px rgba(39, 31, 24, 0.09);
-    }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moda feminina | Moda Versatil</title>
+  <meta name="description" content="A primeira vitrine editorial da Moda Versatil, preparada para as proximas sprints de catalogo, carrinho e checkout." />
 
-    * {
-      box-sizing: border-box;
-    }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- Lucide icons (SVG sprite via CDN) -->
+  <!-- Ícones inline no HTML abaixo -->
+
+  <style>
+    /* ── Reset & base ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
       scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.5;
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: var(--chalk);
+      color: var(--noir);
     }
 
-    button,
-    input {
-      font: inherit;
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; background: none; border: none; font: inherit; }
+
+    /* ── Design tokens ─────────────────────────────────────────────────── */
+    :root {
+      --noir:      #0d0d0d;
+      --chalk:     #f7f4f0;
+      --linen:     #ede8e0;
+      --graphite:  #3c3c3c;
+      --sand:      #b8a896;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:    'Inter', system-ui, sans-serif;
+
+      --tracking-editorial: 0.15em;
+      --ease-luxury: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --shadow-soft: -4px 0 40px rgba(0,0,0,0.08);
     }
 
-    img {
-      display: block;
+    /* ── Utility classes ───────────────────────────────────────────────── */
+
+    /* container-luxury */
+    .container-luxury {
+      margin-inline: auto;
       width: 100%;
+      max-width: 1400px;
+      padding-inline: 1.5rem;
     }
+    @media (min-width: 640px)  { .container-luxury { padding-inline: 2.5rem; } }
+    @media (min-width: 1024px) { .container-luxury { padding-inline: 4rem;   } }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      min-height: 72px;
-      padding: 0 5vw;
-      background: rgba(251, 250, 247, 0.88);
-      border-bottom: 1px solid rgba(223, 216, 207, 0.7);
-      backdrop-filter: blur(16px);
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      min-height: 40px;
-    }
-
-    .brand img {
-      display: block;
-      max-height: 40px;
-      width: auto;
-    }
-
-    .hero-title img {
-      width: min(100%, 620px);
-      height: auto;
-      display: block;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .nav a {
-      padding: 8px 0;
-      border-bottom: 1px solid transparent;
-      transition: color 180ms ease, border-color 180ms ease;
-    }
-
-    .nav a:hover,
-    .nav a:focus-visible {
-      color: var(--ink);
-      border-color: var(--clay);
-      outline: 0;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .icon-button,
-    .menu-toggle {
-      display: inline-grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      background: var(--surface);
-      color: var(--ink);
-      cursor: pointer;
-      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-    }
-
-    .icon-button:hover,
-    .menu-toggle:hover {
-      transform: translateY(-1px);
-      border-color: var(--clay);
-    }
-
-    .saved-count {
-      display: inline-grid;
-      place-items: center;
-      min-width: 18px;
-      height: 18px;
-      margin-left: -12px;
-      align-self: flex-start;
-      border-radius: 999px;
-      background: var(--clay);
-      color: #fff;
-      font-size: 0.72rem;
-    }
-
-    .menu-toggle {
-      display: none;
-    }
-
-    .hero {
-      position: relative;
-      min-height: calc(100vh - 72px);
-      display: grid;
-      align-items: end;
-      padding: 8vh 5vw 10vh;
-      overflow: hidden;
-      isolation: isolate;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background:
-        linear-gradient(90deg, rgba(20, 18, 16, 0.70), rgba(20, 18, 16, 0.28) 45%, rgba(20, 18, 16, 0.05)),
-        url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1800&q=82") center / cover;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0;
-      height: 140px;
-      z-index: -1;
-      background: linear-gradient(180deg, rgba(251, 250, 247, 0), var(--paper));
-    }
-
-    .hero-content {
-      max-width: 710px;
-      color: #fff;
-    }
-
-    .eyebrow {
-      margin: 0 0 18px;
+    /* editorial-kicker */
+    .editorial-kicker {
+      font-size: 10px;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.72rem;
-      color: rgba(255, 255, 255, 0.78);
+      letter-spacing: 0.2em;
+      display: block;
     }
 
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
+    /* focus-luxury */
+    .focus-luxury:focus-visible {
+      outline: 1px solid var(--noir);
+      outline-offset: 2px;
     }
+    .focus-luxury { outline: none; }
 
-    h1 {
-      margin-bottom: 18px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 400;
-      font-size: clamp(3rem, 9vw, 7.5rem);
-      line-height: 0.93;
-      letter-spacing: 0;
-    }
-
-    .hero-copy {
-      max-width: 540px;
-      margin-bottom: 30px;
-      color: rgba(255, 255, 255, 0.84);
-      font-size: clamp(1rem, 2vw, 1.18rem);
-    }
-
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .button {
+    /* icon-btn */
+    .icon-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 48px;
-      padding: 0 22px;
-      border: 1px solid transparent;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      width: 2.5rem;
+      height: 2.5rem;
+      flex-shrink: 0;
     }
 
-    .button:hover {
-      transform: translateY(-1px);
+    /* ── Header ────────────────────────────────────────────────────────── */
+    .site-header {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      z-index: 40;
+      background: transparent;
+      color: var(--chalk);
+      transition: background 0.5s var(--ease-luxury),
+                  color      0.5s var(--ease-luxury);
     }
 
-    .button.primary {
-      background: #fff;
-      color: var(--ink);
+    .site-header.scrolled {
+      background: var(--noir);
     }
 
-    .button.secondary {
-      border-color: rgba(255, 255, 255, 0.42);
-      color: #fff;
-    }
-
-    main {
-      overflow: hidden;
-    }
-
-    section {
-      padding: 82px 5vw;
-    }
-
-    .section-head {
+    .header-inner {
       display: flex;
-      align-items: end;
+      align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      max-width: 1180px;
-      margin: 0 auto 28px;
+      gap: 1rem;
+      height: 5rem;
     }
 
-    .section-head h2 {
-      margin-bottom: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 400;
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      line-height: 1;
+    /* desktop nav */
+    .header-nav {
+      display: none;
+      align-items: center;
+      gap: 2rem;
+    }
+    @media (min-width: 1024px) {
+      .header-nav { display: flex; }
+      .btn-hamburger { display: none !important; }
     }
 
-    .section-head p {
-      max-width: 360px;
-      margin-bottom: 0;
-      color: var(--muted);
+    .header-nav a {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-editorial);
+      transition: opacity 0.2s;
+    }
+    .header-nav a:hover { opacity: 0.6; }
+
+    /* centered logo */
+    .header-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      white-space: nowrap;
     }
 
-    .filters {
+    /* action icons */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    @media (min-width: 640px) { .header-actions { gap: 0.75rem; } }
+
+    .header-actions .icon-link-hidden {
+      display: none;
+    }
+    @media (min-width: 640px) {
+      .header-actions .icon-link-hidden { display: inline-flex; }
+    }
+
+    /* ── Mobile menu drawer ─────────────────────────────────────────────── */
+    .mobile-menu-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 49;
+      background: rgba(13,13,13,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .mobile-menu-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu-drawer {
+      position: fixed;
+      inset-block: 0;
+      left: 0;
+      z-index: 50;
+      width: min(88vw, 360px);
+      height: 100%;
+      background: var(--chalk);
+      color: var(--noir);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-soft);
+      transform: translateX(-100%);
+      transition: transform 0.5s var(--ease-luxury);
+    }
+    .mobile-menu-drawer.open { transform: translateX(0); }
+
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+    .drawer-head span {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      list-style: none;
+    }
+    .mobile-nav a {
+      display: block;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--linen);
+      font-family: var(--font-display);
+      font-size: 1.875rem;
+    }
+    .mobile-nav .nav-login {
+      padding-top: 1rem;
+      border-bottom: none;
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-editorial);
+    }
+
+    /* ── Search overlay ─────────────────────────────────────────────────── */
+    .search-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: var(--chalk);
+      color: var(--noir);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-1.5rem);
+      transition: opacity    0.5s var(--ease-luxury),
+                  transform  0.5s var(--ease-luxury);
+    }
+    .search-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .search-inner {
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
+      padding-block: 1.5rem;
+    }
+    .search-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 3.5rem;
+    }
+    .search-header p {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+    }
+
+    .search-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: 4rem;
+    }
+
+    .search-input-row {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--noir);
+    }
+    .search-input-row svg { margin-right: 1rem; color: var(--graphite); }
+
+    .search-input-row input {
+      flex: 1;
+      height: 5rem;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 3.75rem);
+      color: var(--noir);
+    }
+    .search-input-row input::placeholder { color: rgba(60,60,60,0.5); }
+
+    .search-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      max-width: 1180px;
-      margin: 0 auto 28px;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+    .search-tag {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--linen);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-editorial);
+      transition: border-color 0.2s;
+    }
+    .search-tag:hover { border-color: var(--noir); }
+
+    /* ── Cart drawer ────────────────────────────────────────────────────── */
+    .cart-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 49;
+      background: rgba(13,13,13,0.45);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .cart-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    .filter {
-      min-height: 40px;
-      padding: 0 16px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
-    }
-
-    .filter.active,
-    .filter:hover {
-      border-color: var(--ink);
-      background: var(--ink);
-      color: #fff;
-    }
-
-    .collection-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 18px;
-      max-width: 1180px;
-      margin: 0 auto;
-    }
-
-    .product {
-      background: var(--surface);
-      border: 1px solid rgba(223, 216, 207, 0.72);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 1px 0 rgba(39, 31, 24, 0.03);
-    }
-
-    .product-media {
-      aspect-ratio: 4 / 5;
-      overflow: hidden;
-      background: #eee8df;
-    }
-
-    .product-media img {
+    .cart-drawer {
+      position: fixed;
+      inset-block: 0;
+      right: 0;
+      z-index: 50;
+      width: min(100vw, 430px);
       height: 100%;
-      object-fit: cover;
-      transition: transform 260ms ease;
-    }
-
-    .product:hover .product-media img {
-      transform: scale(1.035);
-    }
-
-    .product-info {
-      display: grid;
-      gap: 8px;
-      padding: 16px;
-    }
-
-    .product-top {
       display: flex;
+      flex-direction: column;
+      background: var(--chalk);
+      color: var(--noir);
+      box-shadow: var(--shadow-soft);
+      transform: translateX(100%);
+      transition: transform 0.5s var(--ease-luxury);
+    }
+    .cart-drawer.open { transform: translateX(0); }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      align-items: start;
+      height: 5rem;
+      padding-inline: 1.5rem;
+      border-bottom: 1px solid var(--linen);
     }
+    .cart-header p { font-size: 0.875rem; color: var(--graphite); }
 
-    .product h3 {
-      margin-bottom: 0;
-      font-size: 1rem;
-      font-weight: 520;
-    }
-
-    .product small {
-      color: var(--muted);
-    }
-
-    .save {
-      display: inline-grid;
-      place-items: center;
-      width: 34px;
-      height: 34px;
-      flex: 0 0 auto;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      background: transparent;
-      cursor: pointer;
-    }
-
-    .save.active {
-      background: var(--charcoal);
-      border-color: var(--charcoal);
-      color: #fff;
-    }
-
-    .price {
-      color: var(--clay);
-      font-weight: 620;
-    }
-
-    .story {
-      display: grid;
-      grid-template-columns: minmax(260px, 0.9fr) minmax(280px, 1.1fr);
-      gap: 52px;
-      align-items: center;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding-top: 34px;
-    }
-
-    .story-media {
-      aspect-ratio: 1 / 1.18;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .story-media img {
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .story-copy h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 400;
-      font-size: clamp(2.1rem, 5vw, 4.6rem);
-      line-height: 0.98;
-      margin-bottom: 22px;
-    }
-
-    .story-copy p {
-      max-width: 560px;
-      color: var(--muted);
-      font-size: 1.04rem;
-    }
-
-    .values {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1px;
-      max-width: 1180px;
-      margin: 42px auto 0;
-      background: var(--line);
-      border: 1px solid var(--line);
-    }
-
-    .value {
-      min-height: 168px;
-      padding: 24px;
-      background: var(--paper);
-    }
-
-    .value h3 {
-      margin-bottom: 10px;
-      font-size: 1rem;
-    }
-
-    .value p {
-      margin-bottom: 0;
-      color: var(--muted);
-    }
-
-    .newsletter {
-      background: var(--charcoal);
-      color: #fff;
-    }
-
-    .newsletter-inner {
-      display: grid;
-      grid-template-columns: 1fr minmax(280px, 460px);
-      gap: 40px;
-      align-items: center;
-      max-width: 1180px;
-      margin: 0 auto;
-    }
-
-    .newsletter h2 {
-      margin-bottom: 10px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 400;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      line-height: 1;
-    }
-
-    .newsletter p {
-      margin-bottom: 0;
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    .signup {
+    .cart-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem 1.5rem;
       display: flex;
-      gap: 10px;
-      padding: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
+      flex-direction: column;
+      justify-content: center;
+    }
+    .cart-empty-title {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+    }
+    .cart-empty-desc {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      line-height: 1.75;
+      color: var(--graphite);
     }
 
-    .signup input {
+    .cart-footer {
+      padding: 1.5rem;
+      border-top: 1px solid var(--linen);
+    }
+    .cart-subtotal {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-checkout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 3rem;
       width: 100%;
-      min-width: 0;
-      border: 0;
-      outline: 0;
-      padding: 0 14px;
-      background: transparent;
-      color: #fff;
+      background: var(--noir);
+      color: var(--chalk);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-editorial);
+      transition: background 0.2s;
     }
+    .btn-checkout:hover { background: var(--graphite); }
 
-    .signup input::placeholder {
-      color: rgba(255, 255, 255, 0.54);
-    }
-
-    .signup button {
-      flex: 0 0 auto;
-      min-height: 44px;
-      padding: 0 18px;
-      border: 0;
-      border-radius: 999px;
-      background: #fff;
-      color: var(--ink);
-      cursor: pointer;
-    }
-
-    .message {
-      grid-column: 2;
-      min-height: 24px;
-      margin: -22px 0 0;
-      color: #f5d7cf;
-      font-size: 0.92rem;
-    }
-
-    footer {
+    /* ── Hero section ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
       display: flex;
+      align-items: flex-end;
+      min-height: 100dvh;
+      overflow: hidden;
+      background: var(--noir);
+      color: var(--chalk);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(120deg, rgba(13,13,13,0.96), rgba(60,60,60,0.45)),
+        url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1800&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      padding-top: 9rem;
+      padding-bottom: 5rem;
+      width: 100%;
+    }
+    @media (min-width: 640px)  { .hero-content { padding-bottom: 6rem; } }
+    @media (min-width: 1024px) { .hero-content { padding-bottom: 7rem; } }
+
+    .hero-kicker { color: var(--linen); margin-bottom: 1.5rem; }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.25rem, 7vw, 5rem);
+      font-weight: 500;
+      line-height: 0.92;
+      max-width: 56rem;
+    }
+    @media (min-width: 640px)  { .hero-title { font-size: clamp(3.75rem, 8vw, 5.5rem); } }
+    @media (min-width: 1024px) { .hero-title { font-size: clamp(4.5rem, 9vw, 6rem);   } }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: var(--linen);
+    }
+    @media (min-width: 640px) {
+      .hero-actions {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .btn-hero {
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 28px 5vw;
-      color: var(--muted);
-      font-size: 0.92rem;
+      height: 2.75rem;
+      padding-inline: 1.5rem;
+      border: 1px solid var(--chalk);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-editorial);
+      color: var(--chalk);
+      transition: background 0.3s, color 0.3s;
+      width: fit-content;
+    }
+    .btn-hero:hover {
+      background: var(--chalk);
+      color: var(--noir);
     }
 
-    @media (max-width: 900px) {
-      .menu-toggle {
-        display: inline-grid;
-      }
+    /* ── Collections section ────────────────────────────────────────────── */
+    .collections-section {
+      padding-block: 5rem;
+    }
+    @media (min-width: 640px) { .collections-section { padding-block: 7rem; } }
 
-      .nav {
-        position: fixed;
-        inset: 72px 0 auto;
-        display: none;
-        grid-template-columns: 1fr;
-        gap: 0;
-        padding: 16px 5vw 24px;
-        background: var(--paper);
-        border-bottom: 1px solid var(--line);
-      }
-
-      .nav.open {
-        display: grid;
-      }
-
-      .nav a {
-        padding: 14px 0;
-      }
-
-      .hero {
-        min-height: 78vh;
-      }
-
-      .collection-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .story,
-      .newsletter-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .message {
-        grid-column: auto;
-        margin-top: -18px;
+    .collections-grid {
+      display: grid;
+      gap: 2.5rem;
+    }
+    @media (min-width: 1024px) {
+      .collections-grid {
+        grid-template-columns: 0.8fr 1.2fr;
+        align-items: end;
       }
     }
 
-    @media (max-width: 620px) {
-      .topbar {
-        min-height: 64px;
-      }
+    .collections-heading .editorial-kicker { margin-bottom: 1rem; }
+    .collections-heading h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+    }
 
-      .brand {
-        font-size: 1.26rem;
-      }
+    .collections-links {
+      display: grid;
+      gap: 0.75rem;
+    }
+    @media (min-width: 640px) { .collections-links { grid-template-columns: repeat(3, 1fr); } }
 
-      .hero {
-        min-height: 82vh;
-        padding-top: 7vh;
-      }
+    .collection-link {
+      display: block;
+      padding: 1.5rem;
+      border: 1px solid var(--linen);
+      background: var(--chalk);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-editorial);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .collection-link:hover {
+      border-color: var(--noir);
+      background: var(--linen);
+    }
 
-      .hero::before {
-        background:
-          linear-gradient(180deg, rgba(20, 18, 16, 0.2), rgba(20, 18, 16, 0.78)),
-          url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1100&q=82") center / cover;
-      }
+    /* ── Footer ─────────────────────────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--linen);
+      background: var(--noir);
+      color: var(--chalk);
+    }
 
-      h1 {
-        font-size: clamp(2.7rem, 18vw, 4.8rem);
-      }
+    .footer-inner {
+      padding-block: 4rem;
+    }
+    @media (min-width: 640px) { .footer-inner { padding-block: 5rem; } }
 
-      section {
-        padding: 58px 5vw;
-      }
+    .footer-main {
+      display: grid;
+      gap: 3rem;
+    }
+    @media (min-width: 1024px) {
+      .footer-main { grid-template-columns: 1.2fr 1fr; }
+    }
 
-      .section-head {
-        display: block;
-      }
+    .footer-brand .editorial-kicker {
+      color: var(--sand);
+      margin-bottom: 1.25rem;
+    }
+    .footer-brand h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      line-height: 1.2;
+      max-width: 42rem;
+    }
+    .footer-brand p {
+      margin-top: 1.5rem;
+      max-width: 36rem;
+      font-size: 0.875rem;
+      line-height: 1.75;
+      color: var(--linen);
+    }
 
-      .section-head p {
-        margin-top: 12px;
-      }
+    .footer-links {
+      display: grid;
+      gap: 2rem;
+    }
+    @media (min-width: 640px) { .footer-links { grid-template-columns: repeat(3, 1fr); } }
 
-      .collection-grid,
-      .values {
-        grid-template-columns: 1fr;
-      }
+    .footer-links-col h3 {
+      margin-bottom: 1.25rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-editorial);
+      color: var(--sand);
+    }
+    .footer-links-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .footer-links-col a {
+      font-size: 0.875rem;
+      color: var(--linen);
+      transition: color 0.2s;
+    }
+    .footer-links-col a:hover { color: var(--chalk); }
 
-      .signup {
-        border-radius: 24px;
-        flex-direction: column;
-        align-items: stretch;
-        padding: 10px;
-      }
-
-      .signup input {
-        min-height: 44px;
-      }
-
-      footer {
-        display: grid;
+    .footer-bottom {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(247,244,240,0.1);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-editorial);
+      color: var(--sand);
+    }
+    @media (min-width: 640px) {
+      .footer-bottom {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
       }
     }
+
+    /* ── SVG icons helper ────────────────────────────────────────────────── */
+    .icon {
+      display: block;
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .icon-lg { width: 1.5rem; height: 1.5rem; }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#top" aria-label="Moda Versátil">
-      <img src="images/logo-moda-versatil.png" alt="Moda Versátil logo">
-    </a>
-    <nav class="nav" id="siteNav" aria-label="Navegação principal">
-      <a href="#colecao">Coleção</a>
-      <a href="#essencia">Essência</a>
-      <a href="#newsletter">Novidades</a>
-    </nav>
-    <div class="nav-actions">
-      <button class="icon-button" type="button" aria-label="Looks salvos">
-        <span aria-hidden="true">&#9825;</span>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <header class="site-header" id="site-header">
+    <div class="container-luxury header-inner">
+
+      <!-- Mobile hamburger -->
+      <button class="icon-btn focus-luxury btn-hamburger" aria-label="Abrir menu" onclick="toggleMenu(true)">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 5h16M4 12h16M4 19h16"/>
+        </svg>
       </button>
-      <span class="saved-count" id="savedCount">0</span>
-      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="siteNav">
-        <span aria-hidden="true">&#9776;</span>
-      </button>
+
+      <!-- Desktop nav -->
+      <nav class="header-nav" aria-label="Principal">
+        <a class="focus-luxury" href="/produtos">Produtos</a>
+        <a class="focus-luxury" href="/colecoes">Coleções</a>
+        <a class="focus-luxury" href="/lookbook">Lookbook</a>
+        <a class="focus-luxury" href="/sobre">Sobre</a>
+      </nav>
+
+      <!-- Logo (centrado) -->
+      <a href="/" class="header-logo focus-luxury" aria-label="Moda Versatil — início">Moda Versatil</a>
+
+      <!-- Action icons -->
+      <div class="header-actions">
+        <button class="icon-btn focus-luxury" aria-label="Abrir busca" onclick="toggleSearch(true)">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.34-4.34"/>
+          </svg>
+        </button>
+
+        <a href="/conta/favoritos" class="icon-btn focus-luxury icon-link-hidden" aria-label="Favoritos">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </a>
+
+        <a href="/login" class="icon-btn focus-luxury icon-link-hidden" aria-label="Minha conta">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+
+        <button class="icon-btn focus-luxury" aria-label="Abrir carrinho" onclick="toggleCart(true)">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+            <path d="M3.103 6.034h17.794"/>
+            <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero" aria-label="Moda Vers&aacute;til">
-      <div class="hero-content">
-        <p class="eyebrow">Feminino essencial</p>
-        <h1><img src="C:\Users\lucas\OneDrive\Documents\landingpage\images\logo-moda-versatil" alt="Logotipo"></h1>
-        <p class="hero-copy">Pe&ccedil;as limpas, elegantes e f&aacute;ceis de combinar para acompanhar manh&atilde;s de trabalho, tardes leves e noites especiais.</p>
-        <div class="button-row">
-          <a class="button primary" href="#colecao">Ver cole&ccedil;&atilde;o</a>
-          <a class="button secondary" href="#essencia">Conhecer a marca</a>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MOBILE MENU DRAWER
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <div class="mobile-menu-backdrop" id="menu-backdrop" onclick="toggleMenu(false)"></div>
+
+  <aside class="mobile-menu-drawer" id="menu-drawer" aria-label="Menu mobile">
+    <div class="drawer-head">
+      <span>Moda Versatil</span>
+      <button class="icon-btn focus-luxury" aria-label="Fechar menu" onclick="toggleMenu(false)">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <ul class="mobile-nav">
+      <li><a href="/produtos" class="focus-luxury">Produtos</a></li>
+      <li><a href="/colecoes" class="focus-luxury">Coleções</a></li>
+      <li><a href="/lookbook" class="focus-luxury">Lookbook</a></li>
+      <li><a href="/sobre" class="focus-luxury">Sobre</a></li>
+      <li><a href="/login" class="focus-luxury nav-login">Entrar</a></li>
+    </ul>
+  </aside>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SEARCH OVERLAY
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <div class="search-overlay" id="search-overlay" aria-hidden="true">
+    <div class="container-luxury search-inner">
+      <div class="search-header">
+        <p>Buscar</p>
+        <button class="icon-btn focus-luxury" aria-label="Fechar busca" onclick="toggleSearch(false)">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="search-body">
+        <label for="global-search" class="editorial-kicker" style="margin-bottom:1.25rem;">Busca instantânea</label>
+        <div class="search-input-row">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.34-4.34"/>
+          </svg>
+          <input id="global-search" type="search" placeholder="O que você procura?" />
+        </div>
+
+        <div class="search-tags">
+          <a class="search-tag focus-luxury" href="/busca?q=vestidos">vestidos</a>
+          <a class="search-tag focus-luxury" href="/busca?q=bolsas">bolsas</a>
+          <a class="search-tag focus-luxury" href="/busca?q=alfaiataria">alfaiataria</a>
+          <a class="search-tag focus-luxury" href="/busca?q=sandalias">sandálias</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       CART DRAWER
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <div class="cart-backdrop" id="cart-backdrop" onclick="toggleCart(false)"></div>
+
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <div>
+        <span class="editorial-kicker">Carrinho</span>
+        <p>0 itens</p>
+      </div>
+      <button class="icon-btn focus-luxury" aria-label="Fechar carrinho" onclick="toggleCart(false)">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cart-body">
+      <p class="cart-empty-title">Seu carrinho está vazio.</p>
+      <p class="cart-empty-desc">
+        A estrutura do mini carrinho está pronta para receber os itens
+        do catálogo na Sprint 2.
+      </p>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <strong>R$ 0,00</strong>
+      </div>
+      <a href="/carrinho" class="btn-checkout focus-luxury">Ir para o carrinho</a>
+    </div>
+  </aside>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MAIN
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <main>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container-luxury hero-content">
+        <span class="editorial-kicker hero-kicker">Sprint 1 — foundation</span>
+        <h1 class="hero-title">Silhuetas precisas para uma loja feita com calma.</h1>
+        <div class="hero-actions">
+          <a href="/produtos" class="btn-hero focus-luxury">Ver produtos</a>
+          <span>Design system, Header, Footer e Prisma prontos para evoluir.</span>
         </div>
       </div>
     </section>
 
-    <section id="colecao" aria-labelledby="collectionTitle">
-      <div class="section-head">
-        <h2 id="collectionTitle">Nova cole&ccedil;&atilde;o</h2>
-        <p>Uma sele&ccedil;&atilde;o c&aacute;psula com tecidos fluidos, cortes precisos e tons que conversam entre si.</p>
-      </div>
-
-      <div class="filters" role="list" aria-label="Filtrar produtos">
-        <button class="filter active" type="button" data-filter="all">Tudo</button>
-        <button class="filter" type="button" data-filter="work">Trabalho</button>
-        <button class="filter" type="button" data-filter="casual">Casual</button>
-        <button class="filter" type="button" data-filter="night">Noite</button>
-      </div>
-
-      <div class="collection-grid">
-        <article class="product" data-category="work">
-          <div class="product-media">
-            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&amp;fit=crop&amp;w=760&amp;q=80" alt="Vestido midi em tom claro">
+    <!-- Collections -->
+    <section class="collections-section" style="background:var(--chalk);">
+      <div class="container-luxury">
+        <div class="collections-grid">
+          <div class="collections-heading">
+            <span class="editorial-kicker">Coleções em destaque</span>
+            <h2>Uma base minimalista para receber catálogo, checkout e conta.</h2>
           </div>
-          <div class="product-info">
-            <div class="product-top">
-              <div>
-                <h3>Vestido Midi Clara</h3>
-                <small>Alfaiataria leve</small>
-              </div>
-              <button class="save" type="button" aria-label="Salvar Vestido Midi Clara">&#9825;</button>
-            </div>
-            <span class="price">R$ 289</span>
-          </div>
-        </article>
-
-        <article class="product" data-category="casual">
-          <div class="product-media">
-            <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&amp;fit=crop&amp;w=760&amp;q=80" alt="Blusa branca minimalista">
-          </div>
-          <div class="product-info">
-            <div class="product-top">
-              <div>
-                <h3>Blusa Linho Aura</h3>
-                <small>Respir&aacute;vel e macia</small>
-              </div>
-              <button class="save" type="button" aria-label="Salvar Blusa Linho Aura">&#9825;</button>
-            </div>
-            <span class="price">R$ 159</span>
-          </div>
-        </article>
-
-        <article class="product" data-category="work">
-          <div class="product-media">
-            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&amp;fit=crop&amp;w=760&amp;q=80" alt="Conjunto feminino de blazer e cal&ccedil;a">
-          </div>
-          <div class="product-info">
-            <div class="product-top">
-              <div>
-                <h3>Conjunto Lisboa</h3>
-                <small>Blazer e pantalona</small>
-              </div>
-              <button class="save" type="button" aria-label="Salvar Conjunto Lisboa">&#9825;</button>
-            </div>
-            <span class="price">R$ 429</span>
-          </div>
-        </article>
-
-        <article class="product" data-category="night">
-          <div class="product-media">
-            <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&amp;fit=crop&amp;w=760&amp;q=80" alt="Vestido preto elegante">
-          </div>
-          <div class="product-info">
-            <div class="product-top">
-              <div>
-                <h3>Slip Dress Noemi</h3>
-                <small>Cetim acetinado</small>
-              </div>
-              <button class="save" type="button" aria-label="Salvar Slip Dress Noemi">&#9825;</button>
-            </div>
-            <span class="price">R$ 349</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="essencia" aria-labelledby="storyTitle">
-      <div class="story">
-        <div class="story-media">
-          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&amp;fit=crop&amp;w=1000&amp;q=82" alt="Editorial de moda feminina minimalista">
-        </div>
-        <div class="story-copy">
-          <h2 id="storyTitle">Guarda-roupa simples, presen&ccedil;a marcante.</h2>
-          <p>A Moda Vers&aacute;til nasce para mulheres que querem se vestir com inten&ccedil;&atilde;o, sem excesso. Cada pe&ccedil;a &eacute; pensada para multiplicar combina&ccedil;&otilde;es e atravessar ocasi&otilde;es com naturalidade.</p>
-          <div class="values">
-            <div class="value">
-              <h3>Modelagem &uacute;til</h3>
-              <p>Cortes que funcionam em movimento, no dia inteiro.</p>
-            </div>
-            <div class="value">
-              <h3>Paleta conectada</h3>
-              <p>Tons neutros, verdes suaves e toques terrosos.</p>
-            </div>
-            <div class="value">
-              <h3>Compra consciente</h3>
-              <p>Pe&ccedil;as dur&aacute;veis para repetir sem parecer igual.</p>
-            </div>
+          <div class="collections-links">
+            <a href="/colecoes" class="collection-link focus-luxury">Alfaiataria essencial</a>
+            <a href="/colecoes" class="collection-link focus-luxury">Couro escultural</a>
+            <a href="/colecoes" class="collection-link focus-luxury">Vestidos de noite</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="newsletter" id="newsletter" aria-labelledby="newsletterTitle">
-      <div class="newsletter-inner">
-        <div>
-          <h2 id="newsletterTitle">Receba lan&ccedil;amentos primeiro.</h2>
-          <p>Novidades discretas, curadoria objetiva e acesso antecipado &agrave;s cole&ccedil;&otilde;es c&aacute;psula.</p>
-        </div>
-        <form class="signup" id="signupForm">
-          <input type="email" id="email" name="email" placeholder="seu@email.com" aria-label="E-mail" required>
-          <button type="submit">Entrar</button>
-        </form>
-        <p class="message" id="formMessage" aria-live="polite"></p>
-      </div>
-    </section>
   </main>
 
-  <footer>
-    <span>&copy; 2026 Moda Vers&aacute;til</span>
-    <span>Atendimento online &bull; Segunda a sexta &bull; 9h &agrave;s 18h</span>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container-luxury footer-inner">
+      <div class="footer-main">
+
+        <!-- Brand blurb -->
+        <div class="footer-brand">
+          <span class="editorial-kicker">Moda Versatil</span>
+          <h2>Elegância editorial, tecnologia precisa e checkout brasileiro.</h2>
+          <p>
+            Pagamentos com cartão, Pix, boleto e parcelamento. Emails transacionais,
+            estoque reservado e catálogo conectado ao SQL Server nas próximas sprints.
+          </p>
+        </div>
+
+        <!-- Link columns -->
+        <div class="footer-links">
+          <div class="footer-links-col">
+            <h3>Comprar</h3>
+            <ul>
+              <li><a href="/produtos">Produtos</a></li>
+              <li><a href="/colecoes">Coleções</a></li>
+              <li><a href="/lookbook">Lookbook</a></li>
+              <li><a href="/busca">Busca</a></li>
+            </ul>
+          </div>
+          <div class="footer-links-col">
+            <h3>Atendimento</h3>
+            <ul>
+              <li><a href="/contato">Contato</a></li>
+              <li><a href="/contato#faq">FAQ</a></li>
+              <li><a href="/checkout">Entrega</a></li>
+              <li><a href="/conta">Minha conta</a></li>
+            </ul>
+          </div>
+          <div class="footer-links-col">
+            <h3>Institucional</h3>
+            <ul>
+              <li><a href="/sobre">Sobre</a></li>
+              <li><a href="/privacidade">Privacidade</a></li>
+              <li><a href="/termos">Termos</a></li>
+              <li><a href="/admin">Admin</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Moda Versatil</p>
+        <p>Stripe · Cloudinary · Prisma · Resend</p>
+      </div>
+    </div>
   </footer>
 
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════════════════════════════════ -->
   <script>
-    const menuButton = document.querySelector(".menu-toggle");
-    const nav = document.querySelector("#siteNav");
-    const filters = document.querySelectorAll(".filter");
-    const products = document.querySelectorAll(".product");
-    const saveButtons = document.querySelectorAll(".save");
-    const savedCount = document.querySelector("#savedCount");
-    const signupForm = document.querySelector("#signupForm");
-    const formMessage = document.querySelector("#formMessage");
+    /* ── Menu mobile ──────────────────────────────────────────────────────── */
+    function toggleMenu(open) {
+      document.getElementById("menu-drawer").classList.toggle("open", open);
+      document.getElementById("menu-backdrop").classList.toggle("open", open);
+      document.body.style.overflow = open ? "hidden" : "";
+    }
 
-    menuButton.addEventListener("click", () => {
-      const isOpen = nav.classList.toggle("open");
-      menuButton.setAttribute("aria-expanded", String(isOpen));
-      menuButton.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
-    });
+    /* ── Search overlay ───────────────────────────────────────────────────── */
+    function toggleSearch(open) {
+      const el = document.getElementById("search-overlay");
+      el.classList.toggle("open", open);
+      el.setAttribute("aria-hidden", String(!open));
+      document.body.style.overflow = open ? "hidden" : "";
+      if (open) setTimeout(() => document.getElementById("global-search").focus(), 300);
+    }
 
-    nav.addEventListener("click", (event) => {
-      if (event.target.matches("a")) {
-        nav.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.setAttribute("aria-label", "Abrir menu");
-      }
-    });
+    /* ── Cart drawer ──────────────────────────────────────────────────────── */
+    function toggleCart(open) {
+      document.getElementById("cart-drawer").classList.toggle("open", open);
+      document.getElementById("cart-backdrop").classList.toggle("open", open);
+      document.body.style.overflow = open ? "hidden" : "";
+    }
 
-    filters.forEach((button) => {
-      button.addEventListener("click", () => {
-        const category = button.dataset.filter;
+    /* ── Header scroll ────────────────────────────────────────────────────── */
+    const header = document.getElementById("site-header");
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 40);
+    }, { passive: true });
 
-        filters.forEach((item) => item.classList.remove("active"));
-        button.classList.add("active");
-
-        products.forEach((product) => {
-          const shouldShow = category === "all" || product.dataset.category === category;
-          product.hidden = !shouldShow;
-        });
-      });
-    });
-
-    saveButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        button.classList.toggle("active");
-        button.textContent = button.classList.contains("active") ? "\u2665" : "\u2661";
-        savedCount.textContent = document.querySelectorAll(".save.active").length;
-      });
-    });
-
-    signupForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const email = new FormData(signupForm).get("email");
-      formMessage.textContent = `${email} entrou na lista de novidades.`;
-      signupForm.reset();
+    /* ── Fechar com ESC ───────────────────────────────────────────────────── */
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      toggleMenu(false);
+      toggleSearch(false);
+      toggleCart(false);
     });
   </script>
+
 </body>
 </html>
